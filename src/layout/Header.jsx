@@ -46,7 +46,7 @@ export default function Header() {
         </span>
       </div>
 
-      <div className="flex flex-col py-6 gap-10 lg:py-2 lg:flex-row lg:justify-between">
+      <div className="flex flex-col py-6 gap-10 lg:py-2 lg:flex-row lg:justify-between lg:px-52">
         <div className="flex justify-between lg:hidden">
           <Link
             to="/"
@@ -65,7 +65,7 @@ export default function Header() {
         </div>
         <nav
           className={`
-            lg:flex lg:flex-row lg:gap-3 lg:py-4 lg:gap-8 lg:w-full lg:justify-around
+            lg:flex lg:flex-row lg:gap-3 lg:py-4 lg:gap-8 lg:w-full
             flex flex-col items-center gap-12 justify-between 
             ${isOpen ? "flex" : "hidden"}
             `}
@@ -146,6 +146,10 @@ export default function Header() {
 
             <Link to="/" className="text-lg font-medium text-gray-600">
               Pages
+            </Link>
+
+             <Link to="/product" className="text-lg font-medium text-gray-600">
+              Product
             </Link>
           </div>
           <div className="flex gap-10 items-center lg:flex text-sm font-medium text-sky-500">
