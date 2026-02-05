@@ -3,6 +3,7 @@ import HomePage from "../pages/HomePage";
 import ShopPage from "../pages/ShopPage";
 import ProductPage from "../pages/ProductPage";
 import ContactPage from "../pages/ContactPage";
+import TeamPage from "../pages/TeamPage";
 
 export default function PageContent() {
   return (
@@ -12,6 +13,7 @@ export default function PageContent() {
         <Route path="/shop" component={ShopPage} />
         <Route path="/product" component={ProductPage} />
         <Route path="/contact" component={ContactPage} />
+        <Route path="/team" component={TeamPage} />
       </Switch>
     </main>
   );

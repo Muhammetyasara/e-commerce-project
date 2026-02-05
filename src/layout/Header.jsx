@@ -18,6 +18,7 @@ import HeaderSlider from "../components/HeaderSlider";
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [isShopOpen, setIsShopOpen] = useState(false);
+  const [isPagesOpen, setIsPagesOpen] = useState(false);
 
   const location = useLocation();
   const isHomePage = location.pathname === "/";
@@ -133,24 +134,73 @@ export default function Header() {
             </div>
 
             <Link to="/" className="text-lg font-medium text-gray-600">
-              About
-            </Link>
-
-            <Link to="/" className="text-lg font-medium text-gray-600">
               Blog
             </Link>
 
-            <Link to="/contact" className="text-lg font-medium text-gray-600">
-              Contact
-            </Link>
+             <div className="relative">
+              <button
+                type="button"
+                onClick={() => setIsPagesOpen((prev) => !prev)}
+                className="flex items-center gap-1 text-lg font-medium text-gray-600 hover:text-black"
+              >
+                Pages
+                <svg
+                  className={`w-4 h-4 transition-transform ${
+                    isPagesOpen ? "rotate-180" : ""
+                  }`}
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M19 9l-7 7-7-7"
+                  />
+                </svg>
+              </button>
 
-            <Link to="/" className="text-lg font-medium text-gray-600">
-              Pages
-            </Link>
-
-             <Link to="/product" className="text-lg font-medium text-gray-600">
-              Product
-            </Link>
+              {isPagesOpen && (
+                <div className="absolute top-full left-0 mt-2 w-40 rounded-md border bg-white shadow-lg z-50">
+                  <Link
+                    to="/contact"
+                    className="block px-4 py-2 text-sm text-gray-600 hover:bg-gray-100"
+                    onClick={() => setIsShopOpen(false)}
+                  >
+                    Contact
+                  </Link>
+                  <Link
+                    to="/product"
+                    className="block px-4 py-2 text-sm text-gray-600 hover:bg-gray-100"
+                    onClick={() => setIsShopOpen(false)}
+                  >
+                    Product
+                  </Link>
+                  <Link
+                    to="/team"
+                    className="block px-4 py-2 text-sm text-gray-600 hover:bg-gray-100"
+                    onClick={() => setIsShopOpen(false)}
+                  >
+                    Team
+                  </Link>
+                  <Link
+                    to="/"
+                    className="block px-4 py-2 text-sm text-gray-600 hover:bg-gray-100"
+                    onClick={() => setIsShopOpen(false)}
+                  >
+                    Pricing
+                  </Link>
+                  <Link
+                    to="/"
+                    className="block px-4 py-2 text-sm text-gray-600 hover:bg-gray-100"
+                    onClick={() => setIsShopOpen(false)}
+                  >
+                    About
+                  </Link>
+                </div>
+              )}
+            </div>
           </div>
           <div className="flex gap-10 items-center lg:flex text-sm font-medium text-sky-500">
             <div className="flex gap-2">

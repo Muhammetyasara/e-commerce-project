@@ -1,15 +1,25 @@
-import { Instagram, Facebook, Twitter } from "lucide-react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faFacebook,
+  faInstagram,
+  faTwitter,
+} from "@fortawesome/free-brands-svg-icons";
 
 export default function Footer({ variant = "default" }) {
   const topSectionBg = variant === "shop" ? "bg-white" : "bg-stone-100";
   return (
     <footer>
-      <section className={`w-full p-12 ${topSectionBg} flex flex-col gap-6 items-start lg:flex-row lg:items-center lg:justify-between lg:px-80 lg:py-16`}>
+      <section
+        className={`w-full p-12 ${topSectionBg} flex flex-col gap-6 items-start lg:flex-row lg:items-center lg:justify-between lg:px-80 lg:py-16`}
+      >
         <h1 className="font-bold text-2xl">Bandage</h1>
         <div className="flex gap-5 text-sky-500">
-          <Facebook size={20} />
-          <Instagram size={20} />
-          <Twitter size={20} />
+          <FontAwesomeIcon icon={faFacebook} className="text-sky-500 text-xl" />
+          <FontAwesomeIcon
+            icon={faInstagram}
+            className="text-sky-500 text-xl"
+          />
+          <FontAwesomeIcon icon={faTwitter} className="text-sky-500 text-xl" />
         </div>
       </section>
 
