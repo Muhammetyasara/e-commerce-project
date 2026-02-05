@@ -98,51 +98,53 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <main className="px-12 pb-24">
+      <main className="px-12 py-24 lg:px-0">
         <div className="flex flex-col items-center justify-center text-center gap-32">
-          <div className="flex flex-col gap-12">
+          <div className="flex flex-col gap-12 lg:flex-row lg:text-start lg:px-52 lg:gap-24">
             <div className="flex flex-col gap-4">
-              <h2 className="text-red-500 font-medium">Problems trying</h2>
+              <h2 className="text-red-500 font-medium text-xs">
+                Problems trying
+              </h2>
               <p className="font-bold">
                 Met minim Mollie non desert Alamo est sit cliquey dolor do met
                 sent.
               </p>
             </div>
-            <p className="text-start text-xs text-stone-600">
+            <p className="text-start text-xs text-stone-600 lg:self-center lg:w-1/2">
               Problems trying to resolve the conflict between the two major
               realms of Classical physics: Newtonian mechanics
             </p>
           </div>
-          <div className="flex flex-col gap-16">
+          <div className="flex flex-col gap-16 lg:flex-row lg:gap-32">
             <div className="flex flex-col gap-2">
-              <p className="font-bold text-4xl">15K</p>
-              <p className="text-xs text-stone-600 font-semibold">
+              <p className="font-bold text-4xl lg:text-6xl">15K</p>
+              <p className="text-xs text-stone-600 font-semibold lg:text-lg">
                 Happy Customers
               </p>
             </div>
             <div className="flex flex-col gap-2">
-              <p className="font-bold text-4xl">150K</p>
-              <p className="text-xs text-stone-600 font-semibold">
+              <p className="font-bold text-4xl lg:text-6xl">150K</p>
+              <p className="text-xs text-stone-600 font-semibold lg:text-lg">
                 Monthly Visitors
               </p>
             </div>
             <div className="flex flex-col gap-2">
-              <p className="font-bold text-4xl">15</p>
-              <p className="text-xs text-stone-600 font-semibold">
+              <p className="font-bold text-4xl lg:text-6xl">15</p>
+              <p className="text-xs text-stone-600 font-semibold lg:text-lg">
                 Countries Worldwide
               </p>
             </div>
             <div className="flex flex-col gap-2">
-              <p className="font-bold text-4xl">100+</p>
-              <p className="text-xs text-stone-600 font-semibold">
+              <p className="font-bold text-4xl lg:text-6xl">100+</p>
+              <p className="text-xs text-stone-600 font-semibold lg:text-lg">
                 Top Partners
               </p>
             </div>
           </div>
-          <div className="relative">
+          <div className="relative lg:px-52">
             <img
               src="./src/assets/images/about-2.png"
-              className="h-[30vh] rounded-xl object-cover w-full"
+              className="h-[30vh] rounded-xl object-cover w-full lg:h-[65vh] lg:w-[65vw]"
             />
 
             <FontAwesomeIcon
@@ -153,15 +155,15 @@ export default function AboutPage() {
         </div>
       </main>
 
-      <section className="pb-32">
+      <section className="pb-32 lg:px-52">
         <div className="flex flex-col justify-center items-center text-center gap-2">
           <h1 className="font-bold text-3xl">Meet Our Team</h1>
-          <p className="text-sm w-3/4 text-stone-500 font-medium">
+          <p className="text-sm w-3/4 text-stone-500 font-medium lg:w-1/3">
             Problems trying to resolve the conflict between the two major realms
             of Classical physics: Newtonian mechanics{" "}
           </p>
         </div>
-        <div>
+        <div className="lg:flex lg:pt-16">
           {members
             .filter((member) => member.id < 4)
             .map((member) => (
@@ -184,16 +186,22 @@ export default function AboutPage() {
 
       <Brands />
 
-      <div className="flex flex-col gap-6 bg-sky-600 py-20 px-12 text-white text-center">
-        <h2 className="font-bold ">WORK WITH US</h2>
-        <p className="font-bold text-4xl">Now Let’s grow Yours</p>
-        <p className="text-stone-200 font-semibold text-xs">
-          The gradual accumulation of information about atomic and small-scale
-          behavior during the first quarter of the 20th
-        </p>
-        <button className="border p-3 text-center w-[40vw] self-center font-bold rounded-md">Button</button>
-      </div>
-
+      <section className="lg:flex">
+        <div className="flex flex-col flex-1 gap-6 bg-sky-600 py-20 px-12 text-white text-center lg:px-0 lg:justify-center lg:text-start lg:pl-44">
+          <h2 className="font-bold ">WORK WITH US</h2>
+          <p className="font-bold text-4xl">Now Let’s grow Yours</p>
+          <p className="text-stone-200 font-semibold text-xs lg:w-1/2">
+            The gradual accumulation of information about atomic and small-scale
+            behavior during the first quarter of the 20th
+          </p>
+          <button className="border p-3 text-center w-[40vw] self-center font-bold rounded-md lg:self-start lg:w-1/6">
+            Button
+          </button>
+        </div>
+        <div className="hidden lg:flex w-[35vw]">
+            <img src="./src/assets/images/about-3.png" alt="" className="object-cover w-full h-full"/>
+        </div>
+      </section>
       <Footer />
     </section>
   );
