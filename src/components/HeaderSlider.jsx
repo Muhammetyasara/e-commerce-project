@@ -55,21 +55,21 @@ function Slide({ image }) {
       "
       style={{ backgroundImage: `url(${image})` }}
     >
-      <div className="w-full h-full flex items-center justify-center">
-        <div className="flex flex-col items-center text-center gap-6 px-6 text-white">
-          <span className="text-sm tracking-widest">
+      <div className="w-full h-full flex items-center justify-center lg:justify-start lg:pl-52">
+        <div className="flex flex-col items-center text-center gap-6 px-6 text-white lg:text-start lg:items-start lg:gap-10 lg:w-full">
+          <span className="text-md font-bold">
             SUMMER 2020
           </span>
 
-          <h2 className="text-3xl font-bold flex flex-wrap w-1/2">
+          <h2 className="text-3xl font-bold flex justify-center w-1/2 lg:w-full lg:text-5xl lg:justify-start">
             NEW COLLECTION
           </h2>
 
-          <p className="text-md flex flex-wrap w-1/2">
+          <p className="text-md flex flex-wrap w-3/4 lg:w-1/5 font-medium">
             We know how large objects will act, but things on a small scale.
           </p>
 
-          <button className="mt-2 px-8 py-3 bg-green-400 text-white text-md font-medium">
+          <button className="mt-2 px-8 py-3 bg-green-500 text-white text-md font-semibold">
             SHOP NOW
           </button>
         </div>

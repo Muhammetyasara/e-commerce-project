@@ -131,16 +131,16 @@ export default function ProductPage() {
               <div className="rounded-full w-6 h-6 bg-black"></div>
             </span>
           </div>
-          <div className="flex items-center justify-between lg:justify-start lg:gap-2">
+          <div className="flex items-center justify-start gap-2 lg:justify-start lg:gap-2 text-nowrap">
             <p className="border p-3 rounded-md bg-sky-500 text-white text-md font-semibold text-nowrap">
               Select Options
             </p>
-            <Heart className="border rounded-full bg-white p-3" size={45} />
+            <Heart className="border rounded-full bg-white shrink-0 p-3" size={45} />
             <ShoppingCart
-              className="border rounded-full bg-white p-3"
+              className="border rounded-full bg-white shrink-0 p-3"
               size={45}
             />
-            <Eye className="border rounded-full bg-white p-3" size={45} />
+            <Eye className="border rounded-full bg-white shrink-0 p-3" size={45} />
           </div>
         </div>
       </nav>

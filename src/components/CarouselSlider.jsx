@@ -61,6 +61,7 @@ function Slide({ image, bottomImage }) {
         flex
         items-center
         justify-center
+        pt-20
       "
       style={{ backgroundImage: `url(${image})` }}
     >

@@ -70,7 +70,7 @@ export default function HomePage() {
           />
         </div>
       </div>
-      <div className="flex flex-col items-center gap-2 justify-center text-center lg:text-center lg:items-center lg:justify-center lg:pt-16">
+      <div className="flex flex-col items-center gap-2 justify-center text-center pt-20 lg:text-center lg:items-center lg:justify-center lg:pt-16">
         <p className="text-stone-600 font-medium text-lg">Featured Products</p>
         <h2 className="flex flex-wrap w-1/3 text-center font-bold text-xl lg:w-full lg:justify-center">
           BESTSELLER PRODUCTS
@@ -80,7 +80,7 @@ export default function HomePage() {
         </p>
       </div>
 
-      <div className="lg:flex lg:flex-wrap lg:items-center lg:justify-center lg:gap-4 lg:p-16 lg:self-center">
+      <div className="pb-12 lg:flex lg:flex-wrap lg:items-center lg:justify-center lg:gap-4 lg:p-16 lg:self-center">
         {products.map((product) => {
           return (
             <ProductCard
