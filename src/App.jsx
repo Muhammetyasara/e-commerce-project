@@ -1,6 +1,4 @@
-import Header from "./layout/Header";
-import Footer from "./layout/Footer";
-import PageContent from "./layout/PageContent";
+import PageContent from "./router/PageContent";
 
 export default function App() {
   return (

@@ -140,7 +140,7 @@ export default function Header() {
               Blog
             </Link>
 
-            <Link to="/" className="text-lg font-medium text-gray-600">
+            <Link to="/contact" className="text-lg font-medium text-gray-600">
               Contact
             </Link>
 
