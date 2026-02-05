@@ -10,14 +10,14 @@ import member9 from "../assets/images/team-member-9.png";
 
 const members = [
   { id: 1, title: "member", image: member1 },
-  { id: 1, title: "member", image: member2 },
-  { id: 1, title: "member", image: member3 },
-  { id: 1, title: "member", image: member4 },
-  { id: 1, title: "member", image: member5 },
-  { id: 1, title: "member", image: member6 },
-  { id: 1, title: "member", image: member7 },
-  { id: 1, title: "member", image: member8 },
-  { id: 1, title: "member", image: member9 },
+  { id: 2, title: "member", image: member2 },
+  { id: 3, title: "member", image: member3 },
+  { id: 4, title: "member", image: member4 },
+  { id: 5, title: "member", image: member5 },
+  { id: 6, title: "member", image: member6 },
+  { id: 7, title: "member", image: member7 },
+  { id: 8, title: "member", image: member8 },
+  { id: 9, title: "member", image: member9 },
 ];
 
 export default members;
