@@ -6,6 +6,7 @@ import {
 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory, useParams } from "react-router-dom";
 import ProductCard from "../components/ProductCard";
 import Header from "../layout/Header";
 import Footer from "../layout/Footer";
@@ -15,6 +16,9 @@ import { setOffset, setLimit } from "../store/actions/productActions";
 
 export default function ShopPage() {
   const dispatch = useDispatch();
+  const history = useHistory();
+  const { gender, categoryName, categoryId } = useParams();
+  
   const { categories, productList, total, limit, offset, fetchState } = useSelector((state) => state.product);
   
   const [open, setOpen] = useState(false);
@@ -32,6 +36,11 @@ export default function ShopPage() {
   const isFirstDisabled = page === 1;
   const isNextDisabled = page === totalPagesDesktop;
 
+  const sortedCategories = [...categories].sort((a, b) => (b.rating || 0) - (a.rating || 0));
+  const top5Categories = sortedCategories.slice(0, 5);
+
+  const selectedCategory = categoryId ? categories.find(cat => cat.id === parseInt(categoryId)) : null;
+
   useEffect(() => {
     dispatch(fetchCategories());
     dispatch(setLimit(perPageDesktop));
@@ -41,8 +50,18 @@ export default function ShopPage() {
   useEffect(() => {
     const newOffset = (page - 1) * perPageDesktop;
     dispatch(setOffset(newOffset));
-    dispatch(fetchProducts({ limit: perPageDesktop, offset: newOffset }));
-  }, [dispatch, page]);
+    
+    const params = {
+      limit: perPageDesktop,
+      offset: newOffset
+    };
+    
+    if (categoryId) {
+      params.category = categoryId;
+    }
+    
+    dispatch(fetchProducts(params));
+  }, [dispatch, page, categoryId]);
 
   const handlePageClick = (pageNum) => {
     setPage(pageNum);
@@ -72,6 +91,17 @@ export default function ShopPage() {
     }
   };
 
+  const handleCategoryClick = (category) => {
+    const genderText = category.gender === "k" ? "kadin" : "erkek";
+    const catName = category.title.toLowerCase().replace(/\s+/g, '-');
+    const catId = category.id;
+    
+    setPage(1);
+    setVisiblePages([1, 2, 3]);
+    
+    history.push(`/shop/${genderText}/${catName}/${catId}`);
+  };
+
   return (
     <>
       <Header />
@@ -83,6 +113,12 @@ export default function ShopPage() {
             <h2 className="font-bold">Home</h2>
             <ChevronRight className="text-stone-400" />
             <h2 className="font-medium text-stone-600">Shop</h2>
+            {selectedCategory && (
+              <>
+                <ChevronRight className="text-stone-400" />
+                <h2 className="font-medium text-stone-600">{selectedCategory.title}</h2>
+              </>
+            )}
           </div>
         </div>
 
@@ -91,9 +127,10 @@ export default function ShopPage() {
         )}
 
         <div className="px-8 flex flex-col justify-center items-center gap-6 bg-stone-100 lg:flex-row">
-          {categories.slice(0, 5).map((category) => (
+          {top5Categories.map((category) => (
             <div
               key={category.id}
+              onClick={() => handleCategoryClick(category)}
               className="relative w-full h-[450px] overflow-hidden cursor-pointer transition-transform duration-300 hover:scale-105 lg:h-[300px]"
             >
               <img
@@ -101,11 +138,13 @@ export default function ShopPage() {
                 alt={category.title}
                 className="absolute inset-0 w-full h-full object-cover"
               />
-              <div className="absolute inset-0 flex flex-col items-center justify-center gap-2">
+              <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-black bg-opacity-30 hover:bg-opacity-20 transition-all">
                 <h3 className="text-white text-xl font-bold tracking-wide">
                   {category.title}
                 </h3>
-                <p className="text-white text-sm font-medium">5 items</p>
+                <p className="text-white text-sm font-medium">
+                  {category.item_count || 5} items
+                </p>
               </div>
             </div>
           ))}

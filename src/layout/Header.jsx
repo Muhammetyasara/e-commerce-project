@@ -1,6 +1,9 @@
-import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useState, useEffect } from "react";
+import { Link, useLocation, useHistory } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import Gravatar from "react-gravatar";
+import { logout } from "../store/actions/clientActions";
+import { fetchCategories } from "../store/actions/thunkActions";
 import {
   Search,
   ShoppingCart,
@@ -22,10 +25,39 @@ export default function Header() {
   const [isPagesOpen, setIsPagesOpen] = useState(false);
 
   const location = useLocation();
+  const history = useHistory();
+  const dispatch = useDispatch();
   const isHomePage = location.pathname === "/";
 
   const cart = useSelector((state) => state.shoppingCart.cart);
   const cartItemCount = cart.reduce((total, item) => total + item.count, 0);
+  
+  const user = useSelector((state) => state.client.user);
+  const categories = useSelector((state) => state.product.categories);
+
+  const isUserLoggedIn = user && Object.keys(user).length > 0;
+
+  useEffect(() => {
+    if (categories.length === 0) {
+      dispatch(fetchCategories());
+    }
+  }, [dispatch, categories.length]);
+
+  const womenCategories = categories.filter(cat => cat.gender === "k");
+  const menCategories = categories.filter(cat => cat.gender === "e");
+
+  const handleLogout = () => {
+    dispatch(logout());
+  };
+
+  const handleCategoryClick = (category) => {
+    const gender = category.gender === "k" ? "kadin" : "erkek";
+    const categoryName = category.title.toLowerCase().replace(/\s+/g, '-');
+    const categoryId = category.id;
+    
+    setIsShopOpen(false);
+    history.push(`/shop/${gender}/${categoryName}/${categoryId}`);
+  };
 
   return (
     <header className="w-full">
@@ -111,28 +143,42 @@ export default function Header() {
               </button>
 
               {isShopOpen && (
-                <div className="absolute top-full left-0 mt-2 w-40 rounded-md border bg-white shadow-lg z-50">
-                  <Link
-                    to="/shop"
-                    className="block px-4 py-2 text-sm text-gray-600 hover:bg-gray-100"
-                    onClick={() => setIsShopOpen(false)}
-                  >
-                    Women
-                  </Link>
-                  <Link
-                    to="/shop"
-                    className="block px-4 py-2 text-sm text-gray-600 hover:bg-gray-100"
-                    onClick={() => setIsShopOpen(false)}
-                  >
-                    Men
-                  </Link>
-                  <Link
-                    to="/shop"
-                    className="block px-4 py-2 text-sm text-gray-600 hover:bg-gray-100"
-                    onClick={() => setIsShopOpen(false)}
-                  >
-                    Accessories
-                  </Link>
+                <div className="absolute top-full left-0 mt-2 w-80 rounded-md border bg-white shadow-lg z-50 p-4">
+                  <div className="flex gap-8">
+                    <div className="flex-1">
+                      <h3 className="font-bold text-sm text-gray-800 mb-3 pb-2 border-b">
+                        Kadın
+                      </h3>
+                      <div className="flex flex-col gap-2">
+                        {womenCategories.map((category) => (
+                          <button
+                            key={category.id}
+                            onClick={() => handleCategoryClick(category)}
+                            className="text-left px-2 py-1 text-sm text-gray-600 hover:bg-gray-100 hover:text-gray-900 rounded"
+                          >
+                            {category.title}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="flex-1">
+                      <h3 className="font-bold text-sm text-gray-800 mb-3 pb-2 border-b">
+                        Erkek
+                      </h3>
+                      <div className="flex flex-col gap-2">
+                        {menCategories.map((category) => (
+                          <button
+                            key={category.id}
+                            onClick={() => handleCategoryClick(category)}
+                            className="text-left px-2 py-1 text-sm text-gray-600 hover:bg-gray-100 hover:text-gray-900 rounded"
+                          >
+                            {category.title}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
                 </div>
               )}
             </div>
@@ -170,35 +216,35 @@ export default function Header() {
                   <Link
                     to="/contact"
                     className="block px-4 py-2 text-sm text-gray-600 hover:bg-gray-100"
-                    onClick={() => setIsShopOpen(false)}
+                    onClick={() => setIsPagesOpen(false)}
                   >
                     Contact
                   </Link>
                   <Link
                     to="/product"
                     className="block px-4 py-2 text-sm text-gray-600 hover:bg-gray-100"
-                    onClick={() => setIsShopOpen(false)}
+                    onClick={() => setIsPagesOpen(false)}
                   >
                     Product
                   </Link>
                   <Link
                     to="/team"
                     className="block px-4 py-2 text-sm text-gray-600 hover:bg-gray-100"
-                    onClick={() => setIsShopOpen(false)}
+                    onClick={() => setIsPagesOpen(false)}
                   >
                     Team
                   </Link>
                   <Link
                     to="/"
                     className="block px-4 py-2 text-sm text-gray-600 hover:bg-gray-100"
-                    onClick={() => setIsShopOpen(false)}
+                    onClick={() => setIsPagesOpen(false)}
                   >
                     Pricing
                   </Link>
                   <Link
                     to="/about"
                     className="block px-4 py-2 text-sm text-gray-600 hover:bg-gray-100"
-                    onClick={() => setIsShopOpen(false)}
+                    onClick={() => setIsPagesOpen(false)}
                   >
                     About
                   </Link>
@@ -207,12 +253,33 @@ export default function Header() {
             </div>
           </div>
           <div className="flex gap-10 items-center lg:flex text-sm font-medium text-sky-500">
-            <div className="flex gap-2 items-center text-md font-bold text-sky-500">
-              <UserRound size={20} />
-              <Link to="/login">Login</Link>
-              <span>/</span>
-              <Link to="/signup">Register</Link>
-            </div>
+            {isUserLoggedIn ? (
+              <div className="flex gap-3 items-center">
+                <Gravatar
+                  email={user.email}
+                  size={30}
+                  rating="pg"
+                  default="identicon"
+                  className="rounded-full"
+                />
+                <span className="text-gray-700 font-medium text-sm hidden lg:block">
+                  {user.name || user.email}
+                </span>
+                <button
+                  onClick={handleLogout}
+                  className="text-red-500 font-bold text-sm hover:text-red-600"
+                >
+                  Logout
+                </button>
+              </div>
+            ) : (
+              <div className="flex gap-2 items-center text-md font-bold text-sky-500">
+                <UserRound size={20} />
+                <Link to="/login">Login</Link>
+                <span>/</span>
+                <Link to="/signup">Register</Link>
+              </div>
+            )}
 
             <Search size={20} className="text-sky-500" />
             
