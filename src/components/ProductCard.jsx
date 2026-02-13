@@ -1,4 +1,13 @@
-export default function ProductCard({title, image}) {
+import { useDispatch } from "react-redux";
+import { addToCart } from "../store/actions/shoppingCartActions";
+
+export default function ProductCard({ title, image, product }) {
+  const dispatch = useDispatch();
+
+  const handleAddToCart = () => {
+    dispatch(addToCart(product));
+  };
+
   return (
     <section className="m-10 flex flex-col items-center gap-4 lg:m-0 lg:w-1/5 lg:flex">
       <img src={image} alt={title} className="lg:w-[239px] lg:h-[427px] lg:object-cover" />
@@ -9,12 +18,19 @@ export default function ProductCard({title, image}) {
         <span className="text-green-700 font-semibold">$6.48</span>
       </div>
 
-      <div className="flex gap-1 lg:pb-8">
+      <div className="flex gap-1 lg:pb-4">
         <span className="w-4 h-4 rounded-full bg-blue-600"></span>
         <span className="w-4 h-4 rounded-full bg-green-600"></span>
         <span className="w-4 h-4 rounded-full bg-orange-600"></span>
         <span className="w-4 h-4 rounded-full bg-black"></span>
       </div>
+
+      <button
+        onClick={handleAddToCart}
+        className="bg-sky-500 text-white px-4 py-2 rounded text-sm font-semibold hover:bg-sky-600 transition"
+      >
+        Add to Cart
+      </button>
     </section>
   );
 }

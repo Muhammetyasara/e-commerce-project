@@ -4,29 +4,73 @@ import {
   ListChecks,
   ChevronDown,
 } from "lucide-react";
-import shopCategories from "../data/shopCategories";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import ProductCard from "../components/ProductCard";
 import Header from "../layout/Header";
 import Footer from "../layout/Footer";
 import Brands from "../components/Brands";
-
-const products = Array.from({ length: 12 }, (_, i) => ({
-  id: i + 1,
-  title: "Product",
-  image: `/src/assets/images/product-${(i % 8) + 1}.png`,
-}));
+import { fetchCategories, fetchProducts } from "../store/actions/thunkActions";
+import { setOffset, setLimit } from "../store/actions/productActions";
 
 export default function ShopPage() {
+  const dispatch = useDispatch();
+  const { categories, productList, total, limit, offset, fetchState } = useSelector((state) => state.product);
+  
   const [open, setOpen] = useState(false);
   const [page, setPage] = useState(1);
+  const [visiblePages, setVisiblePages] = useState([1, 2, 3]);
 
-  const perPage = 4;
-  const totalPages = Math.ceil(products.length / perPage);
-  const mobileProducts = products.slice((page - 1) * perPage, page * perPage);
+  const perPageMobile = 4;
+  const perPageDesktop = 12;
+  
+  const totalPagesMobile = Math.ceil(productList.length / perPageMobile);
+  const totalPagesDesktop = Math.ceil((total || productList.length) / perPageDesktop);
+  
+  const mobileProducts = productList.slice((page - 1) * perPageMobile, page * perPageMobile);
 
   const isFirstDisabled = page === 1;
-  const isNextDisabled = page === totalPages;
+  const isNextDisabled = page === totalPagesDesktop;
+
+  useEffect(() => {
+    dispatch(fetchCategories());
+    dispatch(setLimit(perPageDesktop));
+    dispatch(setOffset(0));
+  }, [dispatch]);
+
+  useEffect(() => {
+    const newOffset = (page - 1) * perPageDesktop;
+    dispatch(setOffset(newOffset));
+    dispatch(fetchProducts({ limit: perPageDesktop, offset: newOffset }));
+  }, [dispatch, page]);
+
+  const handlePageClick = (pageNum) => {
+    setPage(pageNum);
+
+    if (pageNum === visiblePages[2] && pageNum < totalPagesDesktop) {
+      setVisiblePages([visiblePages[1], visiblePages[2], visiblePages[2] + 1]);
+    }
+
+    if (pageNum === visiblePages[0] && pageNum > 1) {
+      setVisiblePages([visiblePages[0] - 1, visiblePages[0], visiblePages[1]]);
+    }
+  };
+
+  const handleFirstPage = () => {
+    setPage(1);
+    setVisiblePages([1, 2, 3]);
+  };
+
+  const handleNextPage = () => {
+    if (page < totalPagesDesktop) {
+      const nextPage = page + 1;
+      setPage(nextPage);
+      
+      if (nextPage > visiblePages[2] && nextPage <= totalPagesDesktop) {
+        setVisiblePages([visiblePages[1], visiblePages[2], nextPage]);
+      }
+    }
+  };
 
   return (
     <>
@@ -42,14 +86,18 @@ export default function ShopPage() {
           </div>
         </div>
 
-        <div className=" px-8 flex flex-col justify-center items-center gap-6 bg-stone-100 lg:flex-row">
-          {shopCategories.map((category) => (
+        {fetchState === 'FETCHING' && (
+          <div className="text-center py-8">Loading...</div>
+        )}
+
+        <div className="px-8 flex flex-col justify-center items-center gap-6 bg-stone-100 lg:flex-row">
+          {categories.slice(0, 5).map((category) => (
             <div
               key={category.id}
               className="relative w-full h-[450px] overflow-hidden cursor-pointer transition-transform duration-300 hover:scale-105 lg:h-[300px]"
             >
               <img
-                src={category.image}
+                src={category.img}
                 alt={category.title}
                 className="absolute inset-0 w-full h-full object-cover"
               />
@@ -65,7 +113,7 @@ export default function ShopPage() {
 
         <div className="flex flex-col gap-16 items-center pt-12 lg:flex-row lg:justify-between lg:px-16">
           <h3 className="font-bold text-stone-600 text-xl">
-            Showing all 12 results
+            Showing all {total || productList.length} results
           </h3>
 
           <div className="flex gap-6">
@@ -117,44 +165,43 @@ export default function ShopPage() {
             {mobileProducts.map((product) => (
               <ProductCard
                 key={product.id}
-                title={product.title}
-                image={product.image}
+                title={product.name || product.title}
+                image={product.images?.[0]?.url || product.img || product.image}
+                product={product}
               />
             ))}
           </div>
 
           <div className="hidden lg:flex lg:flex-wrap lg:justify-center lg:gap-6">
-            {products.map((product) => (
+            {productList.slice(0, perPageDesktop).map((product) => (
               <ProductCard
                 key={product.id}
-                title={product.title}
-                image={product.image}
+                title={product.name || product.title}
+                image={product.images?.[0]?.url || product.img || product.image}
+                product={product}
               />
             ))}
           </div>
         </div>
+
         <div className="flex items-center justify-center">
           <div className="flex justify-between items-center border-2 border-stone-400 rounded-md mx-16 lg:w-1/4 lg:mx-auto">
-            {/* FIRST */}
             <button
-              onClick={() => !isFirstDisabled && setPage(1)}
+              onClick={handleFirstPage}
               disabled={isFirstDisabled}
-              className={`p-6 font-medium transition
-      ${
-        isFirstDisabled
-          ? "bg-stone-200 text-stone-400 cursor-not-allowed"
-          : "text-sky-500 hover:bg-stone-200"
-      }
-    `}
+              className={`p-6 font-medium transition ${
+                isFirstDisabled
+                  ? "bg-stone-200 text-stone-400 cursor-not-allowed"
+                  : "text-sky-500 hover:bg-stone-200"
+              }`}
             >
               First
             </button>
 
-            {/* PAGE NUMBERS */}
-            {[1, 2, 3].map((p) => (
+            {visiblePages.map((p) => (
               <button
                 key={p}
-                onClick={() => setPage(p)}
+                onClick={() => handlePageClick(p)}
                 className={`flex w-full items-center justify-center border-l-2 py-6 px-4 transition ${
                   page === p
                     ? "bg-sky-500 text-white border-sky-500"
@@ -165,23 +212,20 @@ export default function ShopPage() {
               </button>
             ))}
 
-            {/* NEXT */}
             <button
-              onClick={() => !isNextDisabled && setPage((prev) => prev + 1)}
+              onClick={handleNextPage}
               disabled={isNextDisabled}
-              className={`p-6 border-l-2 border-stone-300 font-medium transition
-      ${
-        isNextDisabled
-          ? "bg-stone-200 text-stone-400 cursor-not-allowed"
-          : "text-sky-500 hover:bg-stone-200"
-      }
-    `}
+              className={`p-6 border-l-2 border-stone-300 font-medium transition ${
+                isNextDisabled
+                  ? "bg-stone-200 text-stone-400 cursor-not-allowed"
+                  : "text-sky-500 hover:bg-stone-200"
+              }`}
             >
               Next
             </button>
           </div>
         </div>
-        
+
         <Brands />
       </section>
       <Footer variant="shop" />

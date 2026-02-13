@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
 import {
   Search,
   ShoppingCart,
@@ -22,6 +23,9 @@ export default function Header() {
 
   const location = useLocation();
   const isHomePage = location.pathname === "/";
+
+  const cart = useSelector((state) => state.shoppingCart.cart);
+  const cartItemCount = cart.reduce((total, item) => total + item.count, 0);
 
   return (
     <header className="w-full">
@@ -137,7 +141,7 @@ export default function Header() {
               Blog
             </Link>
 
-             <div className="relative">
+            <div className="relative">
               <button
                 type="button"
                 onClick={() => setIsPagesOpen((prev) => !prev)}
@@ -203,15 +207,24 @@ export default function Header() {
             </div>
           </div>
           <div className="flex gap-10 items-center lg:flex text-sm font-medium text-sky-500">
-            <div className="flex gap-2">
+            <div className="flex gap-2 items-center text-md font-bold text-sky-500">
               <UserRound size={20} />
-              <span className="text-md font-bold flex items-center">
-                Login / Register
-              </span>
+              <Link to="/login">Login</Link>
+              <span>/</span>
+              <Link to="/signup">Register</Link>
             </div>
 
             <Search size={20} className="text-sky-500" />
-            <ShoppingCart size={20} className="text-sky-500" />
+            
+            <div className="relative">
+              <ShoppingCart size={20} className="text-sky-500" />
+              {cartItemCount > 0 && (
+                <span className="absolute -top-2 -right-2 bg-sky-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold">
+                  {cartItemCount}
+                </span>
+              )}
+            </div>
+            
             <Heart size={20} className="text-sky-500" />
           </div>
         </nav>
