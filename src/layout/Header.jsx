@@ -286,8 +286,12 @@ export default function Header() {
             <Search size={20} className="text-sky-500" />
 
             <div className="relative group flex items-center">
-              <ShoppingCart size={20} className="text-sky-500 cursor-pointer" />
-
+              <Link to="/cart">
+                <ShoppingCart
+                  size={20}
+                  className="text-sky-500 cursor-pointer"
+                />
+              </Link>
               {cartItemCount > 0 && (
                 <span className="absolute -top-2 -right-2 bg-sky-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold">
                   {cartItemCount}
@@ -345,9 +349,9 @@ export default function Header() {
                   )}
 
                   <div className="flex gap-2 mt-3 pt-2 border-t">
-                    <button className="w-1/2 border border-sky-500 text-sky-500 py-2 rounded text-sm font-semibold hover:bg-sky-50">
+                    <Link to="/cart" className="w-1/2 border border-sky-500 text-sky-500 py-2 rounded text-sm font-semibold hover:bg-sky-50 text-center flex items-center justify-center">
                       Sepete Git
-                    </button>
+                    </Link>
 
                     <button className="w-1/2 bg-sky-500 text-white py-2 rounded text-sm font-semibold hover:bg-sky-600">
                       Siparişi Tamamla

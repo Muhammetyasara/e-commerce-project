@@ -8,6 +8,7 @@ import TeamPage from "../pages/TeamPage";
 import AboutPage from "../pages/AboutPage";
 import SignupPage from "../pages/SignupPage";
 import LoginPage from "../pages/LoginPage";
+import ShoppingCartPage from "../pages/ShoppingCartPage";
 
 export default function PageContent() {
   return (
@@ -35,6 +36,7 @@ export default function PageContent() {
         <Route path="/about" component={AboutPage} />
         <Route path="/signup" component={SignupPage} />
         <Route path="/login" component={LoginPage} />
+        <Route path="/cart" component={ShoppingCartPage} />
       </Switch>
     </main>
   );

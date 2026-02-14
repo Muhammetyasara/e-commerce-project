@@ -5,6 +5,30 @@ export const ADD_TO_CART = 'ADD_TO_CART';
 export const REMOVE_FROM_CART = 'REMOVE_FROM_CART';
 export const UPDATE_CART_ITEM = 'UPDATE_CART_ITEM';
 export const CLEAR_CART = 'CLEAR_CART';
+export const TOGGLE_CART_ITEM = 'TOGGLE_CART_ITEM';
+export const INCREASE_CART_ITEM = 'INCREASE_CART_ITEM';
+export const DECREASE_CART_ITEM = 'DECREASE_CART_ITEM';
+export const REMOVE_CART_ITEM = 'REMOVE_CART_ITEM';
+
+export const toggleCartItem = (productId) => ({
+  type: TOGGLE_CART_ITEM,
+  payload: productId,
+});
+
+export const increaseCartItem = (productId) => ({
+  type: INCREASE_CART_ITEM,
+  payload: productId,
+});
+
+export const decreaseCartItem = (productId) => ({
+  type: DECREASE_CART_ITEM,
+  payload: productId,
+});
+
+export const removeCartItem = (productId) => ({
+  type: REMOVE_CART_ITEM,
+  payload: productId,
+});
 
 export const setCart = (cart) => ({
   type: SET_CART,
