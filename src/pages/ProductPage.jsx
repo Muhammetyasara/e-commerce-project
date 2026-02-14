@@ -248,13 +248,10 @@ export default function ProductPage() {
     BESTSELLER PRODUCTS
   </h1>
 
-  {/* BORDER */}
   <div className="border w-4/5 mx-auto my-6" />
 
-  {/* PRODUCTS WRAPPER — border ile aynı hizadan başlar */}
   <div className="flex flex-wrap w-4/5 mx-auto">
 
-    {/* CARD 1 */}
     <div className="w-full sm:w-1/2 lg:w-1/4 p-4">
       <div className="aspect-[4/5] w-full">
         <img
@@ -275,7 +272,6 @@ export default function ProductPage() {
       </div>
     </div>
 
-    {/* CARD 2 */}
     <div className="w-full sm:w-1/2 lg:w-1/4 p-4">
       <div className="aspect-[4/5] w-full">
         <img
@@ -296,7 +292,6 @@ export default function ProductPage() {
       </div>
     </div>
 
-    {/* CARD 3 */}
     <div className="w-full sm:w-1/2 lg:w-1/4 p-4">
       <div className="aspect-[4/5] w-full">
         <img
@@ -317,7 +312,6 @@ export default function ProductPage() {
       </div>
     </div>
 
-    {/* CARD 4 */}
     <div className="w-full sm:w-1/2 lg:w-1/4 p-4">
       <div className="aspect-[4/5] w-full">
         <img
@@ -338,7 +332,6 @@ export default function ProductPage() {
       </div>
     </div>
 
-    {/* CARD 5 */}
     <div className="w-full sm:w-1/2 lg:w-1/4 p-4">
       <div className="aspect-[4/5] w-full">
         <img
@@ -359,7 +352,6 @@ export default function ProductPage() {
       </div>
     </div>
 
-    {/* CARD 6 */}
     <div className="w-full sm:w-1/2 lg:w-1/4 p-4">
       <div className="aspect-[4/5] w-full">
         <img
@@ -380,7 +372,6 @@ export default function ProductPage() {
       </div>
     </div>
 
-    {/* CARD 7 */}
     <div className="w-full sm:w-1/2 lg:w-1/4 p-4">
       <div className="aspect-[4/5] w-full">
         <img
@@ -401,7 +392,6 @@ export default function ProductPage() {
       </div>
     </div>
 
-    {/* CARD 8 */}
     <div className="w-full sm:w-1/2 lg:w-1/4 p-4">
       <div className="aspect-[4/5] w-full">
         <img

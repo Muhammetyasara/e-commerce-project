@@ -1,9 +1,4 @@
-import {
-  ChevronRight,
-  LayoutGrid,
-  ListChecks,
-  ChevronDown,
-} from "lucide-react";
+import { ChevronRight, LayoutGrid, ListChecks } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
@@ -17,29 +12,27 @@ import { setOffset, setLimit } from "../store/actions/productActions";
 export default function ShopPage() {
   const dispatch = useDispatch();
   const history = useHistory();
-  const { gender, categoryName, categoryId } = useParams();
-  
-  const { categories, productList, total, limit, offset, fetchState } = useSelector((state) => state.product);
-  
-  const [open, setOpen] = useState(false);
+  const { categoryId } = useParams();
+
+  const { categories, productList, total, limit, offset, fetchState } =
+    useSelector((state) => state.product);
+
   const [page, setPage] = useState(1);
   const [visiblePages, setVisiblePages] = useState([1, 2, 3]);
+  const [sort, setSort] = useState("");
+  const [filter, setFilter] = useState("");
 
-  const perPageMobile = 4;
-  const perPageDesktop = 12;
-  
-  const totalPagesMobile = Math.ceil(productList.length / perPageMobile);
-  const totalPagesDesktop = Math.ceil((total || productList.length) / perPageDesktop);
-  
-  const mobileProducts = productList.slice((page - 1) * perPageMobile, page * perPageMobile);
+  const perPageDesktop = 25;
+  const totalPages = Math.ceil((total || 0) / perPageDesktop);
 
-  const isFirstDisabled = page === 1;
-  const isNextDisabled = page === totalPagesDesktop;
-
-  const sortedCategories = [...categories].sort((a, b) => (b.rating || 0) - (a.rating || 0));
+  const sortedCategories = [...categories].sort(
+    (a, b) => (b.rating || 0) - (a.rating || 0),
+  );
   const top5Categories = sortedCategories.slice(0, 5);
 
-  const selectedCategory = categoryId ? categories.find(cat => cat.id === parseInt(categoryId)) : null;
+  const selectedCategory = categoryId
+    ? categories.find((cat) => cat.id === parseInt(categoryId))
+    : null;
 
   useEffect(() => {
     dispatch(fetchCategories());
@@ -50,23 +43,23 @@ export default function ShopPage() {
   useEffect(() => {
     const newOffset = (page - 1) * perPageDesktop;
     dispatch(setOffset(newOffset));
-    
+
     const params = {
       limit: perPageDesktop,
-      offset: newOffset
+      offset: newOffset,
     };
-    
-    if (categoryId) {
-      params.category = categoryId;
-    }
-    
+
+    if (categoryId) params.category = categoryId;
+    if (filter) params.filter = filter;
+    if (sort) params.sort = sort;
+
     dispatch(fetchProducts(params));
-  }, [dispatch, page, categoryId]);
+  }, [dispatch, page, categoryId, filter, sort]);
 
   const handlePageClick = (pageNum) => {
     setPage(pageNum);
 
-    if (pageNum === visiblePages[2] && pageNum < totalPagesDesktop) {
+    if (pageNum === visiblePages[2] && pageNum < totalPages) {
       setVisiblePages([visiblePages[1], visiblePages[2], visiblePages[2] + 1]);
     }
 
@@ -81,11 +74,11 @@ export default function ShopPage() {
   };
 
   const handleNextPage = () => {
-    if (page < totalPagesDesktop) {
+    if (page < totalPages) {
       const nextPage = page + 1;
       setPage(nextPage);
-      
-      if (nextPage > visiblePages[2] && nextPage <= totalPagesDesktop) {
+
+      if (nextPage > visiblePages[2]) {
         setVisiblePages([visiblePages[1], visiblePages[2], nextPage]);
       }
     }
@@ -93,12 +86,12 @@ export default function ShopPage() {
 
   const handleCategoryClick = (category) => {
     const genderText = category.gender === "k" ? "kadin" : "erkek";
-    const catName = category.title.toLowerCase().replace(/\s+/g, '-');
+    const catName = category.title.toLowerCase().replace(/\s+/g, "-");
     const catId = category.id;
-    
+
     setPage(1);
     setVisiblePages([1, 2, 3]);
-    
+
     history.push(`/shop/${genderText}/${catName}/${catId}`);
   };
 
@@ -116,13 +109,15 @@ export default function ShopPage() {
             {selectedCategory && (
               <>
                 <ChevronRight className="text-stone-400" />
-                <h2 className="font-medium text-stone-600">{selectedCategory.title}</h2>
+                <h2 className="font-medium text-stone-600">
+                  {selectedCategory.title}
+                </h2>
               </>
             )}
           </div>
         </div>
 
-        {fetchState === 'FETCHING' && (
+        {fetchState === "FETCHING" && (
           <div className="text-center py-8">Loading...</div>
         )}
 
@@ -152,7 +147,7 @@ export default function ShopPage() {
 
         <div className="flex flex-col gap-16 items-center pt-12 lg:flex-row lg:justify-between lg:px-16">
           <h3 className="font-bold text-stone-600 text-xl">
-            Showing all {total || productList.length} results
+            Showing all {total || 0} results
           </h3>
 
           <div className="flex gap-6">
@@ -166,32 +161,29 @@ export default function ShopPage() {
           </div>
 
           <div className="flex gap-6">
-            <div className="relative inline-block text-left">
-              <button
-                onClick={() => setOpen(!open)}
-                className="flex items-center gap-2 w-36 h-14 px-4 py-2 border rounded-md border-stone-300 bg-stone-100 text-sm font-medium text-stone-700 hover:bg-stone-200"
-              >
-                Popularity
-                <ChevronDown
-                  size={16}
-                  className={`transition-transform ${open ? "rotate-180" : ""}`}
-                />
-              </button>
+            <input
+              value={filter}
+              onChange={(e) => {
+                setPage(1);
+                setFilter(e.target.value);
+              }}
+              className="border rounded-md px-4"
+            />
 
-              {open && (
-                <div className="absolute z-20 mt-2 w-44 rounded-md border border-stone-200 bg-white shadow-lg">
-                  <button className="block w-full px-4 py-2 text-left text-sm hover:bg-stone-100">
-                    Most Popular
-                  </button>
-                  <button className="block w-full px-4 py-2 text-left text-sm hover:bg-stone-100">
-                    Newest
-                  </button>
-                  <button className="block w-full px-4 py-2 text-left text-sm hover:bg-stone-100">
-                    Price: Low to High
-                  </button>
-                </div>
-              )}
-            </div>
+            <select
+              value={sort}
+              onChange={(e) => {
+                setPage(1);
+                setSort(e.target.value);
+              }}
+              className="border rounded-md px-4"
+            >
+              <option value="">Sort</option>
+              <option value="price:asc">price:asc</option>
+              <option value="price:desc">price:desc</option>
+              <option value="rating:asc">rating:asc</option>
+              <option value="rating:desc">rating:desc</option>
+            </select>
 
             <button className="text-white font-semibold bg-sky-500 py-4 px-8 rounded-md">
               Filter
@@ -199,39 +191,28 @@ export default function ShopPage() {
           </div>
         </div>
 
-        <div className="flex flex-col items-center lg:flex-row lg:flex-wrap lg:justify-center lg:gap-6 lg:px-24">
-          <div className="flex flex-col items-center lg:hidden">
-            {mobileProducts.map((product) => (
-              <ProductCard
-                key={product.id}
-                title={product.name || product.title}
-                image={product.images?.[0]?.url || product.img || product.image}
-                product={product}
-              />
-            ))}
-          </div>
-
-          <div className="hidden lg:flex lg:flex-wrap lg:justify-center lg:gap-6">
-            {productList.slice(0, perPageDesktop).map((product) => (
-              <ProductCard
-                key={product.id}
-                title={product.name || product.title}
-                image={product.images?.[0]?.url || product.img || product.image}
-                product={product}
-              />
-            ))}
-          </div>
+        <div className="flex flex-wrap justify-center gap-6 px-4 lg:flex lg:flex-wrap lg:justify-center lg:gap-6 lg:px-0">
+          {productList.map((product) => (
+            <ProductCard
+              key={product.id}
+              product={product}
+              gender={selectedCategory?.gender}
+              image={product.images?.[0]?.url || product.img || product.image}
+              categoryName={selectedCategory?.title}
+              categoryId={selectedCategory?.id}
+            />
+          ))}
         </div>
 
         <div className="flex items-center justify-center">
           <div className="flex justify-between items-center border-2 border-stone-400 rounded-md mx-16 lg:w-1/4 lg:mx-auto">
             <button
               onClick={handleFirstPage}
-              disabled={isFirstDisabled}
-              className={`p-6 font-medium transition ${
-                isFirstDisabled
+              disabled={page === 1}
+              className={`p-6 font-medium ${
+                page === 1
                   ? "bg-stone-200 text-stone-400 cursor-not-allowed"
-                  : "text-sky-500 hover:bg-stone-200"
+                  : "text-sky-500"
               }`}
             >
               First
@@ -241,10 +222,10 @@ export default function ShopPage() {
               <button
                 key={p}
                 onClick={() => handlePageClick(p)}
-                className={`flex w-full items-center justify-center border-l-2 py-6 px-4 transition ${
+                className={`flex w-full items-center justify-center border-l-2 py-6 px-4 ${
                   page === p
                     ? "bg-sky-500 text-white border-sky-500"
-                    : "border-stone-300 text-sky-500 font-medium hover:bg-stone-100"
+                    : "border-stone-300 text-sky-500"
                 }`}
               >
                 {p}
@@ -253,11 +234,11 @@ export default function ShopPage() {
 
             <button
               onClick={handleNextPage}
-              disabled={isNextDisabled}
-              className={`p-6 border-l-2 border-stone-300 font-medium transition ${
-                isNextDisabled
+              disabled={page === totalPages}
+              className={`p-6 border-l-2 border-stone-300 font-medium ${
+                page === totalPages
                   ? "bg-stone-200 text-stone-400 cursor-not-allowed"
-                  : "text-sky-500 hover:bg-stone-200"
+                  : "text-sky-500"
               }`}
             >
               Next

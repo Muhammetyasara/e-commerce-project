@@ -11,6 +11,7 @@ import {
 const initialState = {
   categories: [],
   productList: [],
+  productDetail: null,
   total: 0,
   limit: 25,
   offset: 0,
@@ -34,6 +35,8 @@ const productReducer = (state = initialState, action) => {
       return { ...state, offset: action.payload };
     case SET_FILTER:
       return { ...state, filter: action.payload };
+    case "SET_PRODUCT_DETAIL":
+      return { ...state, productDetail: action.payload };
     default:
       return state;
   }

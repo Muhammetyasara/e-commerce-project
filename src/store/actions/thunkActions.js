@@ -56,3 +56,16 @@ export const fetchProducts = (params = {}) => {
     }
   };
 };
+
+export const fetchProduct = (id) => {
+  return async (dispatch) => {
+    try {
+      dispatch(setFetchState('FETCHING'));
+      const response = await api.get(`/products/${id}`);
+      dispatch({ type: "SET_PRODUCT_DETAIL", payload: response.data });
+      dispatch(setFetchState('FETCHED'));
+    } catch (error) {
+      dispatch(setFetchState('FAILED'));
+    }
+  };
+};

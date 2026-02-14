@@ -31,11 +31,13 @@ export default function Header() {
 
   const cart = useSelector((state) => state.shoppingCart.cart);
   const cartItemCount = cart.reduce((total, item) => total + item.count, 0);
-  
+
   const user = useSelector((state) => state.client.user);
   const categories = useSelector((state) => state.product.categories);
 
   const isUserLoggedIn = user && Object.keys(user).length > 0;
+
+  const [isCartHover, setIsCartHover] = useState(false);
 
   useEffect(() => {
     if (categories.length === 0) {
@@ -43,8 +45,8 @@ export default function Header() {
     }
   }, [dispatch, categories.length]);
 
-  const womenCategories = categories.filter(cat => cat.gender === "k");
-  const menCategories = categories.filter(cat => cat.gender === "e");
+  const womenCategories = categories.filter((cat) => cat.gender === "k");
+  const menCategories = categories.filter((cat) => cat.gender === "e");
 
   const handleLogout = () => {
     dispatch(logout());
@@ -52,9 +54,9 @@ export default function Header() {
 
   const handleCategoryClick = (category) => {
     const gender = category.gender === "k" ? "kadin" : "erkek";
-    const categoryName = category.title.toLowerCase().replace(/\s+/g, '-');
+    const categoryName = category.title.toLowerCase().replace(/\s+/g, "-");
     const categoryId = category.id;
-    
+
     setIsShopOpen(false);
     history.push(`/shop/${gender}/${categoryName}/${categoryId}`);
   };
@@ -254,7 +256,7 @@ export default function Header() {
           </div>
           <div className="flex gap-10 items-center lg:flex text-sm font-medium text-sky-500">
             {isUserLoggedIn ? (
-              <div className="flex gap-3 items-center">
+              <div className="flex gap-3	items-center">
                 <Gravatar
                   email={user.email}
                   size={30}
@@ -282,16 +284,79 @@ export default function Header() {
             )}
 
             <Search size={20} className="text-sky-500" />
-            
-            <div className="relative">
-              <ShoppingCart size={20} className="text-sky-500" />
+
+            <div className="relative group flex items-center">
+              <ShoppingCart size={20} className="text-sky-500 cursor-pointer" />
+
               {cartItemCount > 0 && (
                 <span className="absolute -top-2 -right-2 bg-sky-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold">
                   {cartItemCount}
                 </span>
               )}
+
+              {/* HOVER KÖPRÜSÜ */}
+              <div className="absolute top-full right-0 h-3 w-full"></div>
+
+              <div className="absolute top-full right-0 pt-3 min-w-[260px] max-w-[320px] z-[999] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition duration-200">
+                <div className="bg-white border rounded shadow-lg p-3 flex flex-col">
+                  <div className="flex justify-between items-center border-b pb-2 mb-2">
+                    <span className="font-semibold text-sm">
+                      Sepetim ({cartItemCount} ürün)
+                    </span>
+                  </div>
+
+                  {cart.length === 0 ? (
+                    <p className="text-sm text-gray-500">Cart is empty</p>
+                  ) : (
+                    <div className="flex flex-col gap-3 max-h-60 overflow-auto">
+                      {cart.map((item) => {
+                        const prod = item.product || {};
+                        const imgUrl =
+                          prod.images?.[0]?.url || prod.img || prod.image || "";
+
+                        return (
+                          <div key={prod.id} className="flex gap-3 items-start">
+                            {imgUrl ? (
+                              <img
+                                src={imgUrl}
+                                className="w-14 h-14 object-cover rounded"
+                              />
+                            ) : (
+                              <div className="w-14 h-14 bg-gray-200 rounded" />
+                            )}
+
+                            <div className="flex flex-col text-sm">
+                              <span className="font-medium">
+                                {prod.name || prod.title}
+                              </span>
+
+                              <span className="text-xs text-gray-500">
+                                Adet: {item.count}
+                              </span>
+
+                              <span className="font-semibold">
+                                {prod.price} ₺
+                              </span>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  )}
+
+                  <div className="flex gap-2 mt-3 pt-2 border-t">
+                    <button className="w-1/2 border border-sky-500 text-sky-500 py-2 rounded text-sm font-semibold hover:bg-sky-50">
+                      Sepete Git
+                    </button>
+
+                    <button className="w-1/2 bg-sky-500 text-white py-2 rounded text-sm font-semibold hover:bg-sky-600">
+                      Siparişi Tamamla
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
-            
+
             <Heart size={20} className="text-sky-500" />
           </div>
         </nav>
