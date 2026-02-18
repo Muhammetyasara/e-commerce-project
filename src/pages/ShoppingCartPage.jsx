@@ -315,7 +315,7 @@ export default function ShoppingCartPage() {
                   )}
                 </div>
 
-                <button className="w-full bg-orange-500 text-white font-bold py-3 rounded-lg transition flex items-center justify-center gap-2">
+                <button  onClick={() => history.push("/create-order")} className="w-full bg-orange-500 text-white font-bold py-3 rounded-lg transition flex items-center justify-center gap-2">
                   Sepeti Onayla
                   <ChevronRight size={20} />
                 </button>
