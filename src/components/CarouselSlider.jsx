@@ -3,9 +3,9 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import leftArrow from "/src/assets/images/arrow-left.png";
 import rightArrow from "/src/assets/images/arrow-right.png";
-import slide1 from "../assets/images/slide-1.png"
 import slide2 from "../assets/images/slide-2.png"
-import slide3 from "../assets/images/slide-3-inner.png"
+import slide3Inner from "../assets/images/slide-3-inner.png"
+import slide3 from "../assets/images/slide-3.png"
 
 function PrevArrow({ onClick }) {
   return (
@@ -45,8 +45,8 @@ export default function CarouselSlider() {
     <section className="relative">
       <Slider {...settings}>
         <Slide
-          image={slide1}
-          bottomImage={slide3}
+          image={slide3}
+          bottomImage={slide3Inner}
         />
         <Slide image={slide2} />
       </Slider>
