@@ -1,12 +1,12 @@
-import member1 from "../assets/images/team-member-1.png";
-import member2 from "../assets/images/team-member-2.png";
-import member3 from "../assets/images/team-member-3.png";
-import member4 from "../assets/images/team-member-4.png";
-import member5 from "../assets/images/team-member-5.png";
-import member6 from "../assets/images/team-member-6.png";
-import member7 from "../assets/images/team-member-7.png";
-import member8 from "../assets/images/team-member-8.png";
-import member9 from "../assets/images/team-member-9.png";
+import member1 from "/images/team-member-1.png";
+import member2 from "/images/team-member-2.png";
+import member3 from "/images/team-member-3.png";
+import member4 from "/images/team-member-4.png";
+import member5 from "/images/team-member-5.png";
+import member6 from "/images/team-member-6.png";
+import member7 from "/images/team-member-7.png";
+import member8 from "/images/team-member-8.png";
+import member9 from "/images/team-member-9.png";
 
 const members = [
   { id: 1, title: "member", image: member1 },
