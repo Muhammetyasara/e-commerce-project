@@ -16,6 +16,14 @@ import { faStar as solidStar } from "@fortawesome/free-solid-svg-icons";
 import { faStar as regularStar } from "@fortawesome/free-regular-svg-icons";
 import Brands from "../components/Brands";
 
+import productShop1 from "./src/assets/images/product-shop-1.png";
+import productShop2 from "./src/assets/images/product-shop-2.png";
+import productShop3 from "./src/assets/images/product-shop-3.png";
+import productShop4 from "./src/assets/images/product-shop-4.png";
+import productShop5 from "./src/assets/images/product-shop-5.png";
+import productShop6 from "./src/assets/images/product-shop-6.png";
+import productShop7 from "./src/assets/images/product-shop-7.png";
+
 export default function ProductPage() {
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -160,7 +168,7 @@ export default function ProductPage() {
         <div className="lg:flex">
           <div className="px-10">
             <img
-              src="./src/assets/images/product-shop-2.png"
+              src={productShop2}
               alt=""
               className="rounded-md shadow-[4px_4px_10px_rgba(0,0,0,0.50)] min-h-[300px] lg:h-full lg:max-w-[20vw] lg:object-cover"
             />
@@ -255,7 +263,7 @@ export default function ProductPage() {
     <div className="w-full sm:w-1/2 lg:w-1/4 p-4">
       <div className="aspect-[4/5] w-full">
         <img
-          src="./src/assets/images/product-shop-1.png"
+          src={productShop1}
           alt=""
           className="w-full h-full object-cover"
         />
@@ -275,7 +283,7 @@ export default function ProductPage() {
     <div className="w-full sm:w-1/2 lg:w-1/4 p-4">
       <div className="aspect-[4/5] w-full">
         <img
-          src="./src/assets/images/product-shop-7.png"
+          src={productShop7}
           alt=""
           className="w-full h-full object-cover"
         />
@@ -295,7 +303,7 @@ export default function ProductPage() {
     <div className="w-full sm:w-1/2 lg:w-1/4 p-4">
       <div className="aspect-[4/5] w-full">
         <img
-          src="./src/assets/images/product-shop-3.png"
+          src={productShop3}
           alt=""
           className="w-full h-full object-cover"
         />
@@ -315,7 +323,7 @@ export default function ProductPage() {
     <div className="w-full sm:w-1/2 lg:w-1/4 p-4">
       <div className="aspect-[4/5] w-full">
         <img
-          src="./src/assets/images/product-shop-4.png"
+          src={productShop4}
           alt=""
           className="w-full h-full object-cover"
         />
@@ -335,7 +343,7 @@ export default function ProductPage() {
     <div className="w-full sm:w-1/2 lg:w-1/4 p-4">
       <div className="aspect-[4/5] w-full">
         <img
-          src="./src/assets/images/product-shop-5.png"
+          src={productShop5}
           alt=""
           className="w-full h-full object-cover"
         />
@@ -355,7 +363,7 @@ export default function ProductPage() {
     <div className="w-full sm:w-1/2 lg:w-1/4 p-4">
       <div className="aspect-[4/5] w-full">
         <img
-          src="./src/assets/images/product-shop-6.png"
+          src={productShop6}
           alt=""
           className="w-full h-full object-cover"
         />
@@ -375,7 +383,7 @@ export default function ProductPage() {
     <div className="w-full sm:w-1/2 lg:w-1/4 p-4">
       <div className="aspect-[4/5] w-full">
         <img
-          src="./src/assets/images/product-shop-7.png"
+          src={productShop7}
           alt=""
           className="w-full h-full object-cover"
         />
@@ -395,7 +403,7 @@ export default function ProductPage() {
     <div className="w-full sm:w-1/2 lg:w-1/4 p-4">
       <div className="aspect-[4/5] w-full">
         <img
-          src="./src/assets/images/product-shop-1.png"
+          src={productShop1}
           alt=""
           className="w-full h-full object-cover"
         />

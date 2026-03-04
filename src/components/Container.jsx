@@ -1,3 +1,5 @@
+import container from "./src/assets/images/container.png";
+
 export default function Container() {
   return (
     <section className="bg-white flex flex-col gap-6 text-black">
@@ -25,7 +27,7 @@ export default function Container() {
             </div>
           </div>
           <img
-            src="./src/assets/images/container.png"
+            src={container}
             alt=""
             className="lg:h-[774px]"
           />

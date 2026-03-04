@@ -5,6 +5,9 @@ import Header from "../layout/Header";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import TeamMemberCard from "../components/TeamMemberCard";
 import members from "../data/memberCards";
+import about1 from "./src/assets/images/about-1.png";
+import about2 from "./src/assets/images/about-2.png";
+import about3 from "./src/assets/images/about-3.png";
 
 export default function AboutPage() {
   return (
@@ -90,7 +93,7 @@ export default function AboutPage() {
             </div>
 
             <img
-              src="./src/assets/images/about-1.png"
+              src={about1}
               alt="product"
               className="relative z-10 h-[95%] max-w-none object-contain"
             />
@@ -143,7 +146,7 @@ export default function AboutPage() {
           </div>
           <div className="relative lg:px-52">
             <img
-              src="./src/assets/images/about-2.png"
+              src={about2}
               className="h-[30vh] rounded-xl object-cover w-full lg:h-[65vh] lg:w-[65vw]"
             />
 
@@ -199,7 +202,7 @@ export default function AboutPage() {
           </button>
         </div>
         <div className="hidden lg:flex w-[35vw]">
-            <img src="./src/assets/images/about-3.png" alt="" className="object-cover w-full h-full"/>
+            <img src={about3} alt="" className="object-cover w-full h-full"/>
         </div>
       </section>
       <Footer />

@@ -14,6 +14,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import Footer from "../layout/Footer";
 import { CornerDownRight, CornerRightDown } from "lucide-react";
+import contact1 from "./src/assets/images/contact-1.png";
 
 export default function ContactPage() {
   return (
@@ -109,7 +110,7 @@ export default function ContactPage() {
             </div>
 
             <img
-              src="./src/assets/images/contact-1.png"
+              src={contact1}
               alt="product"
               className="relative z-10 h-[95%] max-w-none object-contain"
             />

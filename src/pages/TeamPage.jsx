@@ -11,6 +11,12 @@ import {
   faLinkedin,
 } from "@fortawesome/free-brands-svg-icons";
 
+import teamShop1 from "./src/assets/images/team-shop-1.png";
+import teamShop2 from "./src/assets/images/team-shop-2.png";
+import teamShop3 from "./src/assets/images/team-shop-3.png";
+import teamShop4 from "./src/assets/images/team-shop-4.png";
+import teamShop5 from "./src/assets/images/team-shop-5.png";
+
 export default function TeamPage() {
   return (
     <section>
@@ -31,7 +37,7 @@ export default function TeamPage() {
         <div className="flex flex-col gap-2 lg:flex-row">
           <div className="flex-1 overflow-hidden">
             <img
-              src="./src/assets/images/team-shop-1.png"
+              src={teamShop1}
               alt=""
               className="w-full lg:h-[calc(100%-1.25rem)] object-cover"
             />
@@ -41,14 +47,14 @@ export default function TeamPage() {
             <div className="flex flex-col gap-2 flex-1">
               <div className="aspect-square overflow-hidden">
                 <img
-                  src="./src/assets/images/team-shop-2.png"
+                  src={teamShop2}
                   alt=""
                   className="w-full h-full object-cover"
                 />
               </div>
               <div className="aspect-square overflow-hidden">
                 <img
-                  src="./src/assets/images/team-shop-3.png"
+                  src={teamShop3}
                   alt=""
                   className="w-full h-full object-cover"
                 />
@@ -58,14 +64,14 @@ export default function TeamPage() {
             <div className="flex flex-col gap-2 flex-1">
               <div className="aspect-square overflow-hidden">
                 <img
-                  src="./src/assets/images/team-shop-4.png"
+                  src={teamShop4}
                   alt=""
                   className="w-full h-full object-cover"
                 />
               </div>
               <div className="aspect-square overflow-hidden">
                 <img
-                  src="./src/assets/images/team-shop-5.png"
+                  src={teamShop5}
                   alt=""
                   className="w-full h-full object-cover"
                 />

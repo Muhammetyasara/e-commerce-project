@@ -1,6 +1,8 @@
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import rightArrow from "/src/assets/images/arrow-right.png";
+import leftArrow from "/src/assets/images/arrow-left.png";
 
 function PrevArrow({ onClick }) {
   return (
@@ -8,7 +10,7 @@ function PrevArrow({ onClick }) {
       onClick={onClick}
       className="absolute left-4 top-1/2 -translate-y-1/2 z-10"
     >
-      <img src="/src/assets/images/arrow-left.png" alt="Previous" />
+      <img src={leftArrow} alt="Previous" />
     </button>
   );
 }
@@ -19,7 +21,7 @@ function NextArrow({ onClick }) {
       onClick={onClick}
       className="absolute right-4 top-1/2 -translate-y-1/2 z-10"
     >
-      <img src="/src/assets/images/arrow-right.png" alt="Next" />
+      <img src={rightArrow} alt="Next" />
     </button>
   );
 }
