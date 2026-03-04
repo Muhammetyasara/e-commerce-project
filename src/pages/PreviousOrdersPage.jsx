@@ -124,7 +124,7 @@ export default function PreviousOrdersPage() {
             Geri
           </button>
 
-          <h1 className="text-2xl font-bold mb-6">Önceki Siparişlerim</h1>
+          <h1 className="text-2xl font-bold mb-6">Previous Orders</h1>
 
           {loading && (
             <div className="text-center py-16 text-gray-500">Siparişler yükleniyor...</div>
