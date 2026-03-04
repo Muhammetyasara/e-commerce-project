@@ -28,8 +28,8 @@ export default function ProductPage() {
   const [activeIndex, setActiveIndex] = useState(0);
 
   const images = [
-    "/src/assets/images/product-page-1.png",
-    "/src/assets/images/product-page-2.png",
+    "../assets/images/product-page-1.png",
+    "../assets/images/product-page-2.png",
   ];
 
   return (

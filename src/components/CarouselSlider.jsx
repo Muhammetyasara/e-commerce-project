@@ -42,10 +42,10 @@ export default function CarouselSlider() {
     <section className="relative">
       <Slider {...settings}>
         <Slide
-          image="/src/assets/images/slide-3.png"
-          bottomImage="/src/assets/images/slide-3-inner.png"
+          image="../assets/images/slide-3.png"
+          bottomImage="../assets/images/slide-3-inner.png"
         />
-        <Slide image="/src/assets/images/slide-2.png" />
+        <Slide image="../assets/images/slide-2.png" />
       </Slider>
     </section>
   );
