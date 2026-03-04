@@ -11,11 +11,11 @@ import {
   faLinkedin,
 } from "@fortawesome/free-brands-svg-icons";
 
-import teamShop1 from "./src/assets/images/team-shop-1.png";
-import teamShop2 from "./src/assets/images/team-shop-2.png";
-import teamShop3 from "./src/assets/images/team-shop-3.png";
-import teamShop4 from "./src/assets/images/team-shop-4.png";
-import teamShop5 from "./src/assets/images/team-shop-5.png";
+import teamShop1 from "../assets/images/team-shop-1.png";
+import teamShop2 from "../assets/images/team-shop-2.png";
+import teamShop3 from "../assets/images/team-shop-3.png";
+import teamShop4 from "../assets/images/team-shop-4.png";
+import teamShop5 from "../assets/images/team-shop-5.png";
 
 export default function TeamPage() {
   return (

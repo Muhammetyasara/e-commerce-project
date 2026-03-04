@@ -1,4 +1,4 @@
-import container from "./src/assets/images/container.png";
+import container from "../assets/images/container.png";
 
 export default function Container() {
   return (

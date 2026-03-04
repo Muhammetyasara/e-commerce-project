@@ -16,13 +16,13 @@ import { faStar as solidStar } from "@fortawesome/free-solid-svg-icons";
 import { faStar as regularStar } from "@fortawesome/free-regular-svg-icons";
 import Brands from "../components/Brands";
 
-import productShop1 from "./src/assets/images/product-shop-1.png";
-import productShop2 from "./src/assets/images/product-shop-2.png";
-import productShop3 from "./src/assets/images/product-shop-3.png";
-import productShop4 from "./src/assets/images/product-shop-4.png";
-import productShop5 from "./src/assets/images/product-shop-5.png";
-import productShop6 from "./src/assets/images/product-shop-6.png";
-import productShop7 from "./src/assets/images/product-shop-7.png";
+import productShop1 from "../assets/images/product-shop-1.png";
+import productShop2 from "../assets/images/product-shop-2.png";
+import productShop3 from "../assets/images/product-shop-3.png";
+import productShop4 from "../assets/images/product-shop-4.png";
+import productShop5 from "../assets/images/product-shop-5.png";
+import productShop6 from "../assets/images/product-shop-6.png";
+import productShop7 from "../assets/images/product-shop-7.png";
 
 export default function ProductPage() {
   const [activeIndex, setActiveIndex] = useState(0);

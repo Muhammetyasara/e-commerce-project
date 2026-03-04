@@ -5,9 +5,9 @@ import Header from "../layout/Header";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import TeamMemberCard from "../components/TeamMemberCard";
 import members from "../data/memberCards";
-import about1 from "./src/assets/images/about-1.png";
-import about2 from "./src/assets/images/about-2.png";
-import about3 from "./src/assets/images/about-3.png";
+import about1 from "../assets/images/about-1.png";
+import about2 from "../assets/images/about-2.png";
+import about3 from "../assets/images/about-3.png";
 
 export default function AboutPage() {
   return (
