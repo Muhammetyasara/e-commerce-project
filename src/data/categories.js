@@ -1,13 +1,8 @@
-import men from "/images/category-1.png";
-import women from "/images/category-2.png";
-import accessories from "/images/category-3.png";
-import kids from "/images/category-4.png";
-
 const categories = [
-  { id: 1, title: "MEN", image: men },
-  { id: 2, title: "WOMEN", image: women },
-  { id: 3, title: "ACCESSORIES", image: accessories },
-  { id: 4, title: "KIDS", image: kids },
+  { id: 1, title: "MEN", image: "/images/category-1.png" },
+  { id: 2, title: "WOMEN", image: "/images/category-2.png" },
+  { id: 3, title: "ACCESSORIES", image: "/images/category-3.png" },
+  { id: 4, title: "KIDS", image: "/images/category-4.png" },
 ];
 
 export default categories;
