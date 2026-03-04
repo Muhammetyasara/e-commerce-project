@@ -1,11 +1,11 @@
-import product1 from "../assets/images/product-1.png";
-import product2 from "../assets/images/product-2.png";
-import product3 from "../assets/images/product-3.png";
-import product4 from "../assets/images/product-4.png";
-import product5 from "../assets/images/product-5.png";
-import product6 from "../assets/images/product-6.png";
-import product7 from "../assets/images/product-7.png";
-import product8 from "../assets/images/product-8.png";
+import product1 from "/images/product-1.png";
+import product2 from "/images/product-2.png";
+import product3 from "/images/product-3.png";
+import product4 from "/images/product-4.png";
+import product5 from "/images/product-5.png";
+import product6 from "/images/product-6.png";
+import product7 from "/images/product-7.png";
+import product8 from "/images/product-8.png";
 
 const products = [
   { id: 1, title: "product1", image: product1 },
