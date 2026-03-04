@@ -24,12 +24,15 @@ import productShop5 from "../assets/images/product-shop-5.png";
 import productShop6 from "../assets/images/product-shop-6.png";
 import productShop7 from "../assets/images/product-shop-7.png";
 
+import productPage1 from "../assets/images/product-page-1.png";
+import productPage2 from "../assets/images/product-page-2.png";
+
 export default function ProductPage() {
   const [activeIndex, setActiveIndex] = useState(0);
 
   const images = [
-    "../assets/images/product-page-1.png",
-    "../assets/images/product-page-2.png",
+    productPage1,
+    productPage2,
   ];
 
   return (

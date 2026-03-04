@@ -1,10 +1,10 @@
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import rightArrow from "/src/assets/images/arrow-right.png";
-import leftArrow from "/src/assets/images/arrow-left.png";
-import slide1 from "/src/assets/images/slide-1.png";
-import slide2 from "/src/assets/images/slide-2.png";
+import rightArrow from "../assets/images/arrow-right.png";
+import leftArrow from "../assets/images/arrow-left.png";
+import slide1 from "../assets/images/slide-1.png";
+import slide2 from "../assets/images/slide-2.png";
 
 function PrevArrow({ onClick }) {
   return (

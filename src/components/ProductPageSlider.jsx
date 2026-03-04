@@ -3,6 +3,8 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import rightArrow from "../assets/images/arrow-right.png";
 import leftArrow from "../assets/images/arrow-left.png";
+import productPage1 from "../assets/images/product-page-1.png";
+import productPage2 from "../assets/images/product-page-2.png";
 
 function PrevArrow({ onClick }) {
   return (
@@ -44,8 +46,8 @@ export default function ProductPageSlider({ onChange }) {
   return (
     <section className="relative">
       <Slider {...settings}>
-        <Slide image="/src/assets/images/product-page-1.png" />
-        <Slide image="/src/assets/images/product-page-2.png" />
+        <Slide image={productPage1} />
+        <Slide image={productPage2} />
       </Slider>
     </section>
   );
